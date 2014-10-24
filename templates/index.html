@@ -6,7 +6,7 @@
     <body>
         <nav>
             <ul>
-                {%- for key, value in tree.iteritems()|sort recursive %}
+                {%- for key, value in tree.iteritems() recursive %}
                 {%- if value is mapping -%}
                     {%- if loop.depth == 1 %}
                         <li class="device">{{ key }}/<ul>{{ loop(value.iteritems()) }}</ul></li>
@@ -16,7 +16,7 @@
                         <li class="folder">{{ key }}/<ul>{{ loop(value.iteritems()) }}</ul></li>
                     {%- endif %}
                 {% else %}
-                    <li class="file"><a href="/data/{# path/to/file #}/{{ key }}">{{ key }}</a></li>
+                    <li class="file"><a href="/data/{{ value }}/{{ key }}">{{ key }}</a></li>
                 {% endif %}
                 {%- endfor %}
             </ul>
