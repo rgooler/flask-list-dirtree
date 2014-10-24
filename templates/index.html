@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testapp</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                {%- for key, value in tree.iteritems()|sort recursive %}
+                {%- if value is mapping -%}
+                    {%- if loop.depth == 1 %}
+                        <li class="device">{{ key }}/<ul>{{ loop(value.iteritems()) }}</ul></li>
+                    {%- elif loop.depth == 2 %}
+                        <li class="app">{{ key }}/<ul>{{ loop(value.iteritems()) }}</ul></li>
+                    {%- else %}
+                        <li class="folder">{{ key }}/<ul>{{ loop(value.iteritems()) }}</ul></li>
+                    {%- endif %}
+                {% else %}
+                    <li class="file"><a href="/data/{# path/to/file #}/{{ key }}">{{ key }}</a></li>
+                {% endif %}
+                {%- endfor %}
+            </ul>
+        </nav>
+    </body>
+</html>
