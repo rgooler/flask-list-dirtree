@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def route_index():
-    files = {'device': {'full': {'foo': None}, 'bar': None, 'empty': {}}}
+    files = {'device': {'app': {'full': {'foo': None}, 'bar': None, 'empty': {}}}}
     response = render_template("index.html", tree=files)
     response, errors = tidy_document(response)
     return response
